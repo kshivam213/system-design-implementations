@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: document-service
+  profiles:
+    active: dev
+
+cloud:
+  aws:
+    credentials:
+      access-key: <<your_s3_access_key>>
+      secret-key: <<your-s3-secret-key>>
+    region:
+      static: ap-southeast-2
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: codebinz-document-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.design.documentservice: INFO
+    org.springframework: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
